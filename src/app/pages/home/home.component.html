@@ -1,0 +1,42 @@
+<div class="container-fluid text-center">
+
+    <div class="container">
+        <h1>Pokemon de la semana</h1>
+        <figure class="figure">
+            <img [src]="pokemons[0].imagen" class="figure-img img-fluid rounded" [alt]="pokemons[0].nombre">
+            <figcaption class="figure-caption">{{pokemons[0].nombre}}</figcaption>
+          </figure>
+    </div>
+
+    <div class="container" style="width: 50%;">
+        <h1>Carrousel</h1>
+        <div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">
+            <div class="carousel-inner">  
+                <div 
+                    *ngFor="let pokemon of pokemons"
+                    [class]="pokemon.id == 1 ? 'carousel-item active' : 'carousel-item'"                     
+                >
+                    <img [src]="pokemon.imagen" class="d-block w-100" alt="Pikachu">
+                    <h5 *ngIf="pokemon.peso > 10;else templateName">Es pesado</h5>
+                    <ng-template #templateName> <h5>Es ligero</h5>  </ng-template>
+                    <div [ngSwitch]="pokemon.tipo">
+                        <div *ngSwitchCase="1">Eléctrico</div>
+                        <div *ngSwitchCase="2">Fuego</div>
+                        <div *ngSwitchCase="3">Planta</div>
+                        <div *ngSwitchDefault>Tipo Desconocido</div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</div>
